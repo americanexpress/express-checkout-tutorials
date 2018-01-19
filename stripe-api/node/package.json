@@ -1,0 +1,11 @@
+{
+  "name": "express_checkout_sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "install": "npm install express stripe http-proxy-agent ejs body-parser"
+  },
+  "author": "",
+  "license": "Apache-2.0"
+}

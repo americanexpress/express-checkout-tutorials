@@ -1,0 +1,39 @@
+{% macro account_details(token) -%}
+	{% if token != null %}
+		<br><br>
+		<fieldset disabled class="col-md-12">
+			<div class="form-group">
+				<label for="disabledTextInput"><strong>Cardmember Details</strong></label><br>
+
+				<label for="disabledTextInput">Cardmember Name</label>
+				<input type="text" id="name" class="form-control"
+				placeholder="{{token['card']['name']}}">
+
+				<label for="disabledTextInput">Last 4 Digits of American Express Card</label>
+				<input type="text" id="last4" class="form-control"
+				placeholder="**** ***** {{token['card']['dynamic_last4']}}">
+				
+				<label for="disabledTextInput">Expiration Date</label>
+				<input type="text" id="expirationDate" class="form-control"
+				placeholder="{{token['card']['exp_month']}}/{{token['card']['exp_year']}}">
+				
+			</div>
+		</fieldset>
+
+		<br><br>
+		<fieldset disabled class="col-md-12">
+			<div class="form-group">
+				<label for="disabledTextInput"><strong>Billing Address</strong></label><br>
+
+				<input type="text" id="addressLine1" class="form-control"
+				placeholder="{{token['card']['address_line1']}}">
+				<input type="text" id="addressLine2" class="form-control"
+				placeholder="{{token['card']['address_line2']}}">
+				<input type="text" id="addressCityStateAndCountry" class="form-control"
+				placeholder="{{token['card']['address_city']}} {{token['card']['address_state']}}, {{token['card']['address_country']}}">
+			</div>
+		</fieldset>
+
+		<input type="hidden" name="stripeToken" value="{{token['id']}}">
+	{% endif %}
+{%- endmacro %}

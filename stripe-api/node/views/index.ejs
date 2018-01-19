@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include header %>
+  </head>
+  
+  <body>
+    <script>
+      function aexpCallback(response) {
+
+        var token = response.token;
+        if (token) {
+            $('#hidden-form').append(
+              $('<input type="hidden" name="stripeToken">').val(token));
+
+            $('#hidden-form').submit();
+        }
+      }
+    </script>
+
+    <amex:init client_id="CLIENT_ID"
+               env="qa"
+               callback="aexpCallback" />
+
+    <!-- a hidden form to gather information from user's token -->
+    <div style="display:none;">
+      <form action="/" method="post" id="hidden-form"></form>
+  </div>
+
+  <!-- the visible form -->
+    <form action="/charge" method="post" id="payment-form">
+      <div class="form-row col-md-12">
+        <h4>You are being charged $5.</h4>
+      </div>
+
+      <div class="form-row col-md-12">
+        <p>Please click the Express Checkout button to continue.</p>
+      </div>
+
+      <div class="form-row col-md-12">
+        <p><ol>
+          <li>Username: "test_user"</li>
+          <li>Password: "password"</li>
+          <li>Access Code: "123456"</li>
+        </ol></p>
+      </div>
+
+      <div class="form-row col-md-12">
+        <p>Once your information appears, press "Submit" at the bottom of the page.</p>
+      </div>
+
+      <div class="form-row col-md-12">
+        <div class="form-group">
+          <div id="amex-express-checkout"></div>
+          <div id="card-errors" role="alert"></div>
+        </div>
+      </div>
+
+      <% include account_details %>
+
+      <div class="form-group col-md-12">
+            <button id="submit-button" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://icm.aexp-static.com/Internet/IMDC/US_en/RegisteredCard/AmexExpressCheckout/js/AmexExpressCheckout.js"></script>
+</body>
+</html>
